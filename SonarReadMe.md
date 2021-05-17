@@ -29,3 +29,25 @@
 
 For more details, refer AWS Documentation for https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html
 
+<h2>Configuration of EC2 Server</h2>
+
+- After connecting to EC2 using SSH, lets configure the server with prerequisities
+
+We need install:
+
+- JDK11
+- JRE11
+- Docker
+
+- Elevate as Root User
+
+<code>sudo su</code>
+
+- Get docker-compose
+
+<code>wget https://raw.githubusercontent.com/duorg/Scripts/master/docker-compose.yml</code></br>
+<code>sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose</code></br>
+<code>sudo chmod +x /usr/local/bin/docker-compose</code></br>
+
+
+
