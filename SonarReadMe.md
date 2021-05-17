@@ -45,9 +45,62 @@ We need install:
 
 - Get docker-compose
 
-<code>wget https://raw.githubusercontent.com/duorg/Scripts/master/docker-compose.yml</code></br>
+<code>sudo wget https://raw.githubusercontent.com/duorg/Scripts/master/docker-compose.yml</code></br>
 <code>sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose</code></br>
 <code>sudo chmod +x /usr/local/bin/docker-compose</code></br>
+
+- Check the docker-compose version
+
+<code>sudo docker-compose version</code>
+
+- Create two files Dockerfile, sonar.properties with the below content
+
+File1:Dockerfile
+--------------------------------------
+FROM sonarqube:7.9-community</br>
+COPY sonar.properties /opt/sonarqube/conf/
+
+File2: sonar.properties
+----------------------------------------
+sonar.junit.reportPaths=target/surefire-reports</br>
+sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+
+#Creating the files
+----------------------------------------
+sudo vi Dockerfile<br>
+FROM sonarqube:7.9-community<br>
+COPY sonar.properties /opt/sonarqube/conf/<br>
+
+sudo vi sonar.properties</br>
+sonar.junit.reportPaths=target/surefire-reports</br>
+sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml</br>
+
+
+
+- Change the directory back to root
+
+  <code> cd ..</code>
+
+<h2>Configuration of SonarQube Server</h2>
+
+<h3>Preparing the environment</h3>
+
+<b>In order the run SonarQube in Ubuntu, you must ensure that</b>
+
+- vm.max_map_count is greater than or equal to 524288
+- fs.file-max is greater than or equal to 131072
+- the user running SonarQube can open at least 131072 file descriptors
+- the user running SonarQube can open at least 8192 threads
+
+<b>You can see the values with the following commands:</b>
+
+- sysctl vm.max_map_count
+- sysctl fs.file-max
+- ulimit -n
+- ulimit -u
+
+
+
 
 
 
